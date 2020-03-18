@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndividualCapstone", "IndividualCapstone\IndividualCapstone.csproj", "{5E902483-C1AF-4340-AB6D-99EC60FCF12B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E902483-C1AF-4340-AB6D-99EC60FCF12B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E902483-C1AF-4340-AB6D-99EC60FCF12B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E902483-C1AF-4340-AB6D-99EC60FCF12B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E902483-C1AF-4340-AB6D-99EC60FCF12B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5270A13-DBF9-48AF-AE84-91CBA4F8D1B8}
+	EndGlobalSection
+EndGlobal
