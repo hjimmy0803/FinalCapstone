@@ -21,9 +21,17 @@ namespace IndividualCapstone.Models
         [Display (Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Display (Name = "Business Name")]
+        public string BusinessName { get; set; }
+
         [ForeignKey("IdentityUSer")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
+
+        [ForeignKey("Address")]
+        [Display(Name = "Address")]
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
 
 
     }
