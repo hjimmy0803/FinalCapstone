@@ -4,44 +4,22 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200318215546_ Created employee model")]
+    partial class Createdemployeemodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("IndividualCapstone.Models.Account", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("BiMonthlyService")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("MonthlySerice")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("QuarterlyService")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Accounts");
-                });
 
             modelBuilder.Entity("IndividualCapstone.Models.Address", b =>
                 {
@@ -74,9 +52,6 @@ namespace IndividualCapstone.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int");
-
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
@@ -93,8 +68,6 @@ namespace IndividualCapstone.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
 
                     b.HasIndex("AddressId");
 
@@ -155,22 +128,22 @@ namespace IndividualCapstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7079e45f-daa7-4f22-9df8-1a74ddb2a1c0",
-                            ConcurrencyStamp = "bfe92474-7b4a-4f09-aee6-efb057d2e70a",
+                            Id = "25c9fad5-7735-4402-b490-88a21fd0e44a",
+                            ConcurrencyStamp = "af2d0c3a-1a96-4239-b4b0-c96b9a65df75",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9bf5ef31-81c9-414c-8ae4-e44d20ce2df0",
-                            ConcurrencyStamp = "5dd3a7bf-7d31-40b8-a80a-071812cbd343",
+                            Id = "7f6b3759-310e-48e7-bff1-e158f4497c4c",
+                            ConcurrencyStamp = "e02e6288-46e8-420b-935e-3dc020cd6676",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "090cf71c-dfa4-4797-8874-735e4025a367",
-                            ConcurrencyStamp = "df212cf5-b309-4712-9f24-89adda368216",
+                            Id = "1ea03395-f11a-4e4a-8842-86791741ca02",
+                            ConcurrencyStamp = "df617632-3b22-4354-9ab4-ddd4ca54da40",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -347,12 +320,6 @@ namespace IndividualCapstone.Data.Migrations
 
             modelBuilder.Entity("IndividualCapstone.Models.Customer", b =>
                 {
-                    b.HasOne("IndividualCapstone.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("IndividualCapstone.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")

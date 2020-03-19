@@ -15,10 +15,7 @@ namespace IndividualCapstone.Data
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-
+      
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -29,9 +26,30 @@ namespace IndividualCapstone.Data
                 {
                     Name = "Admin",
                     NormalizedName = "ADMIN"
+                },
+                new IdentityRole
+                {
+                     Name = "Customer",
+                     NormalizedName = "CUSTOMER",
+
+
+                },
+                new IdentityRole
+                {
+                    Name = "Employee",
+                    NormalizedName = "EMPLOYEE",
+
+
                 }
+
               );
 
         }
+
+      
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Address> Addresses { get; set; }
     }
 }

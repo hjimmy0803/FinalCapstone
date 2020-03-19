@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319164736_ Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("IndividualCapstone.Models.Address", b =>
@@ -64,7 +66,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("IndividualCapstone.Models.Customer", b =>
@@ -100,7 +102,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("IndividualCapstone.Models.Employee", b =>
@@ -123,7 +125,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -155,22 +157,22 @@ namespace IndividualCapstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7079e45f-daa7-4f22-9df8-1a74ddb2a1c0",
-                            ConcurrencyStamp = "bfe92474-7b4a-4f09-aee6-efb057d2e70a",
+                            Id = "aa6eb5d6-9f1c-4079-a444-2bd02e3d71e5",
+                            ConcurrencyStamp = "4fcacbd1-49c8-485b-89a2-d7c4619a9445",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9bf5ef31-81c9-414c-8ae4-e44d20ce2df0",
-                            ConcurrencyStamp = "5dd3a7bf-7d31-40b8-a80a-071812cbd343",
+                            Id = "22ebdd8c-b97d-4a26-8f4a-2504cd1aa352",
+                            ConcurrencyStamp = "73d86cb8-eb01-4978-8783-2624a1fcfffb",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "090cf71c-dfa4-4797-8874-735e4025a367",
-                            ConcurrencyStamp = "df212cf5-b309-4712-9f24-89adda368216",
+                            Id = "24573105-e665-4be9-a810-cdd538477c2f",
+                            ConcurrencyStamp = "034875c1-3ae0-421f-a398-f6e39b5cd20b",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });

@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319162720_ Created customer and employee controllers also renamed employees and customers controller to employee and customer to match the model name")]
+    partial class Createdcustomerandemployeecontrollersalsorenamedemployeesandcustomerscontrollertoemployeeandcustomertomatchthemodelname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("IndividualCapstone.Models.Address", b =>
@@ -64,7 +66,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("IndividualCapstone.Models.Customer", b =>
@@ -100,7 +102,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("IndividualCapstone.Models.Employee", b =>
@@ -123,7 +125,7 @@ namespace IndividualCapstone.Data.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -155,22 +157,22 @@ namespace IndividualCapstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7079e45f-daa7-4f22-9df8-1a74ddb2a1c0",
-                            ConcurrencyStamp = "bfe92474-7b4a-4f09-aee6-efb057d2e70a",
+                            Id = "95ba894d-3d59-4451-9f65-12d03eb5080a",
+                            ConcurrencyStamp = "a0094bd5-eab3-43fe-983f-a3316895f0cc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9bf5ef31-81c9-414c-8ae4-e44d20ce2df0",
-                            ConcurrencyStamp = "5dd3a7bf-7d31-40b8-a80a-071812cbd343",
+                            Id = "5f4de729-8c47-45bd-a1b6-79df073f17ec",
+                            ConcurrencyStamp = "c01a0c35-3b05-4fdc-a9e7-6a9809dffb6a",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "090cf71c-dfa4-4797-8874-735e4025a367",
-                            ConcurrencyStamp = "df212cf5-b309-4712-9f24-89adda368216",
+                            Id = "b7bac747-9888-46d3-ae79-959c632587f6",
+                            ConcurrencyStamp = "21e16e90-7c79-45a9-b796-d04f61ce9349",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
