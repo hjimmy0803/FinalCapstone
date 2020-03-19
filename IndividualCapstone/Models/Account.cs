@@ -14,14 +14,11 @@ namespace IndividualCapstone.Models
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
-        [Display(Name = "Monthly Service")]
-        public DateTime MonthlySerice { get; set; }
+        [Display(Name = "Type Of Service")]
+        public string TypeOfService { get; set; }
 
-        [Display(Name = "Bi Monthly Service")]
-        public DateTime BiMonthlyService { get; set; }
-
-        [Display(Name = "Quarterly Service")]
-        public DateTime QuarterlyService { get; set; }
+        [Display(Name = "Suspend Service")]
+        public bool IsSuspended { get; set; }
 
         
 

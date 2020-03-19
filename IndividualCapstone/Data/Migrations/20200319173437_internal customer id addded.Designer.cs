@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319173437_internal customer id addded")]
+    partial class internalcustomeridaddded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,14 +28,17 @@ namespace IndividualCapstone.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("IsSuspended")
-                        .HasColumnType("bit");
+                    b.Property<string>("BiMonthlyService")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MonthlySerice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuarterlyService")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("TypeOfService")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -152,22 +157,22 @@ namespace IndividualCapstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fafccb87-8823-4feb-90dd-f154099e9d1d",
-                            ConcurrencyStamp = "6ad46f32-882f-4b79-8819-01456ea52ab5",
+                            Id = "35494e27-5ec4-4e57-8272-ecc2cd99a129",
+                            ConcurrencyStamp = "95babe59-dba3-4fe8-a84f-9621887e67eb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "028a4eae-56ba-4626-9cc6-da8b8b15e403",
-                            ConcurrencyStamp = "5471933d-c5ff-48f4-b4cf-f78ed39f14fe",
+                            Id = "2b5433f3-0f7f-4cff-a140-ff58c8b80d1e",
+                            ConcurrencyStamp = "b786646f-aaa8-48f1-9646-80bb69492660",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "471804e7-babc-49d0-a1e6-9220cfcfaf5a",
-                            ConcurrencyStamp = "32757b43-60ac-4197-a526-fc239c2efd8a",
+                            Id = "6ac70f97-7796-4466-84fe-433761732e7d",
+                            ConcurrencyStamp = "b91ce8b7-d10b-44ba-b13c-b4db6efd85a7",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });

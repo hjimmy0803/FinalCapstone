@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319171850_ changed a few things in my account model and changed zip code from string to int")]
+    partial class changedafewthingsinmyaccountmodelandchangedzipcodefromstringtoint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,14 +28,17 @@ namespace IndividualCapstone.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("IsSuspended")
-                        .HasColumnType("bit");
+                    b.Property<string>("BiMonthlyService")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MonthlySerice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QuarterlyService")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("TypeOfService")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -152,22 +157,22 @@ namespace IndividualCapstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fafccb87-8823-4feb-90dd-f154099e9d1d",
-                            ConcurrencyStamp = "6ad46f32-882f-4b79-8819-01456ea52ab5",
+                            Id = "ccf640cf-5124-4acb-a8e6-5a968e362fdc",
+                            ConcurrencyStamp = "aa8f95cf-cfdf-4779-9f56-a764224df8b8",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "028a4eae-56ba-4626-9cc6-da8b8b15e403",
-                            ConcurrencyStamp = "5471933d-c5ff-48f4-b4cf-f78ed39f14fe",
+                            Id = "115723b0-b27f-4e46-9cf1-6d2d5f064b85",
+                            ConcurrencyStamp = "2fe07ba0-f49e-4c65-99a0-312fc71187d6",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "471804e7-babc-49d0-a1e6-9220cfcfaf5a",
-                            ConcurrencyStamp = "32757b43-60ac-4197-a526-fc239c2efd8a",
+                            Id = "c3abb945-b9d2-4650-bf33-408719d977e6",
+                            ConcurrencyStamp = "66b01d6c-eea8-447e-a1b6-5f12f4378526",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
