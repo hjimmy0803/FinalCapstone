@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace IndividualCapstone.Data.Migrations
+namespace IndividualCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319214353_redo database")]
+    partial class redodatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,22 +154,22 @@ namespace IndividualCapstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fafccb87-8823-4feb-90dd-f154099e9d1d",
-                            ConcurrencyStamp = "6ad46f32-882f-4b79-8819-01456ea52ab5",
+                            Id = "b118f87a-1fea-49f5-bd26-7199a28b3499",
+                            ConcurrencyStamp = "bb9f1751-1908-427d-a08a-affab0f76eb5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "028a4eae-56ba-4626-9cc6-da8b8b15e403",
-                            ConcurrencyStamp = "5471933d-c5ff-48f4-b4cf-f78ed39f14fe",
+                            Id = "768f7509-1d11-4e6f-a061-c03abaa45875",
+                            ConcurrencyStamp = "4389598f-2afa-495c-8aae-cf0c2c72cb19",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "471804e7-babc-49d0-a1e6-9220cfcfaf5a",
-                            ConcurrencyStamp = "32757b43-60ac-4197-a526-fc239c2efd8a",
+                            Id = "9e36c42b-47f6-49b5-a765-e012a2c5815e",
+                            ConcurrencyStamp = "fca8614b-4115-40a5-9b5c-043295f041aa",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });

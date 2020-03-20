@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IndividualCapstone.Data;
 using IndividualCapstone.Models;
+using System.Security.Claims;
 
 namespace IndividualCapstone.Controllers
 {
@@ -22,8 +23,10 @@ namespace IndividualCapstone.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Customers.Include(c => c.Account).Include(c => c.Address).Include(c => c.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var currentCustomer =await _context.Customers.Include(c => c.Account).Include(c => c.Address).Where(c => c.IdentityUserId == userId).ToListAsync();
+            return View(currentCustomer);
         }
 
         // GET: Customers/Details/5
