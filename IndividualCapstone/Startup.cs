@@ -37,7 +37,16 @@ namespace IndividualCapstone
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "241200952130-lmd9h4c8vk8hmoaugkgv50c5al4rgfkr.apps.googleusercontent.com";
+                    options.ClientId = "x9EILXC19SSQpaeri5e0ZH1U";
+                });
+                
+
         }
+      
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
