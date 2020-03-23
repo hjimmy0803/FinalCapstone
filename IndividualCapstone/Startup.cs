@@ -41,7 +41,7 @@ namespace IndividualCapstone
                 .AddGoogle(options =>
                 {
                     options.ClientId = "241200952130-lmd9h4c8vk8hmoaugkgv50c5al4rgfkr.apps.googleusercontent.com";
-                    options.ClientId = "x9EILXC19SSQpaeri5e0ZH1U";
+                    options.ClientSecret = "x9EILXC19SSQpaeri5e0ZH1U";
                 });
                 
 

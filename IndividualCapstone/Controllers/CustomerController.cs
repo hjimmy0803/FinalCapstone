@@ -55,7 +55,7 @@ namespace IndividualCapstone.Controllers
         {
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id");
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id");
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
