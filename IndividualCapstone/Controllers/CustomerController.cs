@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace IndividualCapstone.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    
     public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -129,15 +129,15 @@ namespace IndividualCapstone.Controllers
                     editedCustomer.Address.City = customer.Address.City;
                     editedCustomer.Address.State = customer.Address.State;
                     editedCustomer.Address.ZipCode = customer.Address.ZipCode;
-                    editedCustomer.Account.OneTimePickup = customer.Account.StartDate;
+                    editedCustomer.Account.StartDate = customer.Account.StartDate;
                     editedCustomer.Account.IsSuspended = customer.Account.IsSuspended;
 
-                    //_context.Entry(editedCustomer).State = EntityState.Modified;
+                    _context.Entry(editedCustomer).State = EntityState.Modified;
 
 
-                    //_context.Update(customer);
-                    //await _context.SaveChangesAsync();
-                    //return RedirectToAction(nameof(Index));
+                    _context.Update(customer);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {

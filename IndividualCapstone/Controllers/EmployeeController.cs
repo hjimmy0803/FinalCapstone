@@ -10,6 +10,7 @@ using IndividualCapstone.Models;
 
 namespace IndividualCapstone.Controllers
 {
+
     public class EmployeeController : Controller
     {
         private readonly ApplicationDbContext _context;
