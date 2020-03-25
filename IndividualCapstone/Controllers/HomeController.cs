@@ -35,6 +35,13 @@ namespace IndividualCapstone.Controllers
         {
             return View();
         }
+        [Route("Pay")]
+        public Task<dynamic> Pay()
+        {
+
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

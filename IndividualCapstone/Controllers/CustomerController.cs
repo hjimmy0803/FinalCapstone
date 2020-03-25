@@ -71,8 +71,8 @@ namespace IndividualCapstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                //_context.Addresses.Add(customer.Address);
-                //_context.SaveChanges();
+                _context.Addresses.Add(customer.Address);
+                _context.SaveChanges();
 
                 // gets the ID of the logged in user
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -96,14 +96,34 @@ namespace IndividualCapstone.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var customerToUpdate = await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
+            if(await TryUpdateModelAsync(
+                customerToUpdate,
+                "",
+                c => c.FirstName, c => c.LastName, c => c.BusinessName, c => c.Address.Street, c => c.Address.City,
+                c => c.Address.ZipCode, c => c.Account.IsSuspended))
             {
-                return NotFound();
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. " +
+               "Try again, and if the problem persists, " +
+               "see your system administrator.");
+
+                }
             }
-            ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
-            ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            return View(customer);
+            return View(customerToUpdate);
+            //if (customer == null)
+            //{
+            //    return NotFound();
+            //}
+            //ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
+            //ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
+            //return View(customer);
         }
 
         // POST: Customers/Edit/5
@@ -113,7 +133,8 @@ namespace IndividualCapstone.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Customer customer)
         {
-            var editedCustomer = _context.Customers.Find(id);
+            
+
             if (id != customer.Id)
             {
                 return NotFound();
@@ -123,17 +144,7 @@ namespace IndividualCapstone.Controllers
             {
                 try
                 {
-                    editedCustomer.FirstName = customer.FirstName;
-                    editedCustomer.LastName = customer.LastName;
-                    editedCustomer.Address.Street = customer.Address.Street;
-                    editedCustomer.Address.City = customer.Address.City;
-                    editedCustomer.Address.State = customer.Address.State;
-                    editedCustomer.Address.ZipCode = customer.Address.ZipCode;
-                    editedCustomer.Account.StartDate = customer.Account.StartDate;
-                    editedCustomer.Account.IsSuspended = customer.Account.IsSuspended;
-
-                    _context.Entry(editedCustomer).State = EntityState.Modified;
-
+                   
 
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
