@@ -10,7 +10,7 @@ namespace IndividualCapstone.Models
 {
     public class Customer
     {
-        internal Customer id;
+        
 
         [Key]
         public int Id { get; set; }

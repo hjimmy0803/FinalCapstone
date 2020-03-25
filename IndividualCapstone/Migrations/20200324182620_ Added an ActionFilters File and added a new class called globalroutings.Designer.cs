@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200324182620_ Added an ActionFilters File and added a new class called globalroutings")]
+    partial class AddedanActionFiltersFileandaddedanewclasscalledglobalroutings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,22 +154,22 @@ namespace IndividualCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0b88ae3d-2eba-4787-a4d6-714556656645",
-                            ConcurrencyStamp = "77654f8e-9026-440f-89e0-5f663a2c9b96",
+                            Id = "0ab3808c-f08c-4159-99b1-3704e9c7f207",
+                            ConcurrencyStamp = "fe9f2dea-8998-4a46-9a8d-6884c3b4c7e0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "494d8a7c-0a54-49cf-a979-a8af09bdbffc",
-                            ConcurrencyStamp = "8d945b7a-e119-4baa-82ee-b710a99a7667",
+                            Id = "a2836eb2-65ec-4298-99bd-9f487ea7c439",
+                            ConcurrencyStamp = "4cd986c7-b963-469c-9f39-d3ab02c2e489",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "95728b90-1537-45bf-a5d6-9be6a4b99021",
-                            ConcurrencyStamp = "07feb8be-4808-40c8-998b-96b160be548c",
+                            Id = "34c353a3-c43b-42bd-b1ef-ced6a1b39ae0",
+                            ConcurrencyStamp = "4e247785-b27f-4c87-bd41-ca3efad16f80",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });

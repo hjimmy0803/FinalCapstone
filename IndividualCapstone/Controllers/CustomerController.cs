@@ -8,14 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using IndividualCapstone.Data;
 using IndividualCapstone.Models;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IndividualCapstone.Controllers
 {
-    public class CustomersController : Controller
+    [Authorize(Roles = "Customer")]
+    public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomersController(ApplicationDbContext context)
+        public CustomerController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -32,6 +34,7 @@ namespace IndividualCapstone.Controllers
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -40,7 +43,6 @@ namespace IndividualCapstone.Controllers
             var customer = await _context.Customers
                 .Include(c => c.Account)
                 .Include(c => c.Address)
-                .Include(c => c.IdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
@@ -53,6 +55,7 @@ namespace IndividualCapstone.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
+           
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id");
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id");
             //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
@@ -64,17 +67,24 @@ namespace IndividualCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,BusinessName,IdentityUserId,AddressId,AccountId")] Customer customer)
+        public async Task<IActionResult> Create(Customer customer)
         {
             if (ModelState.IsValid)
             {
+                //_context.Addresses.Add(customer.Address);
+                //_context.SaveChanges();
+
+                // gets the ID of the logged in user
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                customer.IdentityUserId = userId;
+
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
 
@@ -93,7 +103,6 @@ namespace IndividualCapstone.Controllers
             }
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
 
@@ -102,8 +111,9 @@ namespace IndividualCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,BusinessName,IdentityUserId,AddressId,AccountId")] Customer customer)
+        public async Task<IActionResult> Edit(int id, Customer customer)
         {
+            var editedCustomer = _context.Customers.Find(id);
             if (id != customer.Id)
             {
                 return NotFound();
@@ -113,8 +123,21 @@ namespace IndividualCapstone.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    editedCustomer.FirstName = customer.FirstName;
+                    editedCustomer.LastName = customer.LastName;
+                    editedCustomer.Address.Street = customer.Address.Street;
+                    editedCustomer.Address.City = customer.Address.City;
+                    editedCustomer.Address.State = customer.Address.State;
+                    editedCustomer.Address.ZipCode = customer.Address.ZipCode;
+                    editedCustomer.Account.OneTimePickup = customer.Account.StartDate;
+                    editedCustomer.Account.IsSuspended = customer.Account.IsSuspended;
+
+                    //_context.Entry(editedCustomer).State = EntityState.Modified;
+
+
+                    //_context.Update(customer);
+                    //await _context.SaveChangesAsync();
+                    //return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -127,11 +150,9 @@ namespace IndividualCapstone.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
 

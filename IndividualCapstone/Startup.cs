@@ -12,6 +12,9 @@ using IndividualCapstone.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using IndividualCapstone.ActionFilters;
 
 namespace IndividualCapstone
 {
@@ -30,7 +33,7 @@ namespace IndividualCapstone
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
@@ -38,11 +41,18 @@ namespace IndividualCapstone
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddAuthentication()
-                .AddGoogle(options =>
+                .AddGoogle(googleOptions =>
                 {
-                    options.ClientId = "241200952130-lmd9h4c8vk8hmoaugkgv50c5al4rgfkr.apps.googleusercontent.com";
-                    options.ClientSecret = "x9EILXC19SSQpaeri5e0ZH1U";
+                    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
                 });
+                
+                   
+            services.AddScoped<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext.User);
+            services.AddControllers(config =>
+            {
+                config.Filters.Add(typeof(GlobalRouting));
+            });
                 
 
         }
