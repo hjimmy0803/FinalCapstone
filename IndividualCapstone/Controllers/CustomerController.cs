@@ -58,7 +58,7 @@ namespace IndividualCapstone.Controllers
            
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id");
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id");
-            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -85,6 +85,7 @@ namespace IndividualCapstone.Controllers
             }
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
 
@@ -96,34 +97,15 @@ namespace IndividualCapstone.Controllers
                 return NotFound();
             }
 
-            var customerToUpdate = await _context.Customers.FirstOrDefaultAsync(c => c.Id == id);
-            if(await TryUpdateModelAsync(
-                customerToUpdate,
-                "",
-                c => c.FirstName, c => c.LastName, c => c.BusinessName, c => c.Address.Street, c => c.Address.City,
-                c => c.Address.ZipCode, c => c.Account.IsSuspended))
+            var customer = await _context.Customers.FindAsync(id);
+            if(customer == null)
             {
-                try
-                {
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. " +
-               "Try again, and if the problem persists, " +
-               "see your system administrator.");
-
-                }
+                return NotFound();
             }
-            return View(customerToUpdate);
-            //if (customer == null)
-            //{
-            //    return NotFound();
-            //}
-            //ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
-            //ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
-            //return View(customer);
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
+            ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
+            ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
+            return View(customer);
         }
 
         // POST: Customers/Edit/5
@@ -148,7 +130,7 @@ namespace IndividualCapstone.Controllers
 
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -162,6 +144,7 @@ namespace IndividualCapstone.Controllers
                     }
                 }
             }
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
             return View(customer);
