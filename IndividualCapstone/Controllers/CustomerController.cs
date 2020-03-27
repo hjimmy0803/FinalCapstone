@@ -55,11 +55,12 @@ namespace IndividualCapstone.Controllers
         // GET: Customers/Create
         public IActionResult Create()
         {
-           
-            ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id");
-            ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id");
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
+           
+            //ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id");
+            //ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id");
+            //ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            //return View();
         }
 
         // POST: Customers/Create
@@ -90,15 +91,16 @@ namespace IndividualCapstone.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditAsync(int? id)
         {
+           
             if (id == null)
             {
                 return NotFound();
             }
 
             var customer = await _context.Customers.FindAsync(id);
-            if(customer == null)
+            if (customer == null)
             {
                 return NotFound();
             }
@@ -113,9 +115,8 @@ namespace IndividualCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Customer customer)
+        public async Task<IActionResult> EditAsync( int? id, Customer customer)
         {
-            
 
             if (id != customer.Id)
             {
@@ -126,11 +127,11 @@ namespace IndividualCapstone.Controllers
             {
                 try
                 {
-                   
+
 
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
-                    
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
