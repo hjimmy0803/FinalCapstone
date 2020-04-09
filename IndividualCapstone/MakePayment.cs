@@ -12,7 +12,7 @@ namespace IndividualCapstone
         {
             try
             {
-                StripeConfiguration.ApiKey = "sk_test_QVMHSve6X4AY982OFfwNjO3Z000Vjl0ADt";
+                StripeConfiguration.ApiKey = "SecretKey";
 
                 var optionstoken = new TokenCreateOptions
                 {

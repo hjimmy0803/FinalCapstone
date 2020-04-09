@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace IndividualCapstone.Models
 {
     public class Address
@@ -22,5 +23,7 @@ namespace IndividualCapstone.Models
 
         [Display(Name = "Zip Code")]
         public int ZipCode { get; set; }
+        public double? Lat { get; set; }
+        public double? Lng { get; set; }
     }
 }

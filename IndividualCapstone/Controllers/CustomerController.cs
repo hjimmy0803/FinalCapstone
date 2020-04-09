@@ -9,6 +9,11 @@ using IndividualCapstone.Data;
 using IndividualCapstone.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
+using Newtonsoft.Json;
+
+
+
 
 namespace IndividualCapstone.Controllers
 {
@@ -34,6 +39,13 @@ namespace IndividualCapstone.Controllers
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.mymap = "https://maps.googleapis.com/maps/api/js?key=" + APIs.Keys.mapsKey + "&callback=initMap";
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customerMap = _context.Customers.Include(c => c.Address)
+                .Where(c => c.IdentityUserId == userId)
+                .Select(c => c.Address).FirstOrDefault();
+            ViewBag.CustomerLat = customerMap.Lat;
+            ViewBag.CustomerLng = customerMap.Lng;
 
             if (id == null)
             {
@@ -72,16 +84,36 @@ namespace IndividualCapstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Addresses.Add(customer.Address);
-                _context.SaveChanges();
 
                 // gets the ID of the logged in user
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 customer.IdentityUserId = userId;
+                HttpClient client = new HttpClient();
 
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (customer.Address.Lat == null || customer.Address.Lng == null)
+                {
+                    string location = customer.Address.Street + "+" + customer.Address.City + "+" + customer.Address.State + "+" +
+                        customer.Address.ZipCode;
+                    string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + APIs.Keys.mapsKey;
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    string answer = await response.Content.ReadAsStringAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        GeoCode GeoResult = JsonConvert.DeserializeObject<GeoCode>(answer);
+                        var lat = GeoResult.results[0].geometry.location.lat;
+                        var lng = GeoResult.results[0].geometry.location.lng;
+                        customer.Address.Lat = lat;
+                        customer.Address.Lng = lng;
+                        _context.Update(customer.Address);
+
+
+                    }
+                    await _context.SaveChangesAsync();
+
+                }
+                
 
             }
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
@@ -91,7 +123,7 @@ namespace IndividualCapstone.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> EditAsync(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
            
             if (id == null)

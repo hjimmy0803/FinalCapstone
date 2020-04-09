@@ -14,9 +14,6 @@ namespace IndividualCapstone.Models
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
 
-        [Display(Name = "Type Of Service")]
-        public string TypeOfService { get; set; }
-
         [Display(Name = "Suspend Service")]
         public bool IsSuspended { get; set; }
 

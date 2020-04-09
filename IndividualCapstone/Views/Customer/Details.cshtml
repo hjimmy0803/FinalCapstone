@@ -65,28 +65,34 @@
             Customer Location
         </div>
 
-        <div class="col-md-6">
-            <div id="map" style="height:100px; width: 100px;"></div>
-            <script>
-                var map;
-                function initMap() {
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: 34.1108751, lng: -117.5078002 },
-                        zoom: 16
-
-                    });
-                }
-            </script>
-
-        </div>
-
     </div>
-    <script src="https://maps.googleapis.com/,maps/api/js?key=AIzaSyBOhtaRpiTmrYN8V8gnv9o9MlnyMqqhuGI&callback=initMap"
-            async defer></script>
-    <script src="~/js/Untitled-1.js"></script>
+    <div id="map" style="height:500px; width:500px"></div>
+
+
+
 
     <div>
         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
         <a asp-action="Index">Back to List</a>
     </div>
 </div>
+<script>
+    function initMap() {
+        var myLatLng = { lat: @Model.Address.Lat, lng: @Model.Address.Lng };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: myLatLng
+        });
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Customer'
+        });
+    }
+
+
+                   
+</script>
+<script async defer
+        src=@ViewBag.mymap>
+</script>

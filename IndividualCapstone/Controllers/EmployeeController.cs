@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IndividualCapstone.Data;
 using IndividualCapstone.Models;
+using System.Security.Claims;
 
 namespace IndividualCapstone.Controllers
 {
@@ -23,29 +24,44 @@ namespace IndividualCapstone.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentEmployee = _context.Employees.Where(e => e.IdentityUserId == userId).FirstOrDefault();
+            var customerRequest = _context.Customers
+                .Include(c => c.Address)
+                .Include(c => c.Account)
+                .Include(c => c.TypeOfService);
+                
+            
+            return View(customerRequest.ToList());
         }
 
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.mymap = "https://maps.googleapis.com/maps/api/js?key=" + APIs.Keys.mapsKey + "&callback=initMap";
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customerMap = _context.Customers.Include(c => c.Address)
+                .Where(c => c.IdentityUserId == userId)
+                .Select(c => c.Address).FirstOrDefault();
+            ViewBag.CustomerLat = customerMap.Lat;
+            ViewBag.CustomerLng = customerMap.Lng;
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .Include(e => e.IdentityUser)
+            var customer = await _context.Customers
+                .Include(c => c.Account)
+                .Include(c => c.Address)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(customer);
         }
-
         // GET: Employees/Create
         public IActionResult Create()
         {
@@ -58,13 +74,13 @@ namespace IndividualCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,IdentityUserId")] Employee employee)
+        public async Task<IActionResult> Create( Employee employee)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", employee);
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
             return View(employee);

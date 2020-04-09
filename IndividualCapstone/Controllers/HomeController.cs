@@ -38,7 +38,7 @@ namespace IndividualCapstone.Controllers
         [Route("Pay")]
         public async Task<dynamic> Pay(Models.Payment p)
         {
-            return await MakePayment.PayAsync(p.cardNumber, p.month, p.year, p.cvc, p.value);
+            return await MakePayment.PayAsync(p.CardNumber, p.Month, p.Year, p.Cvc, p.Value);
         }
 
 

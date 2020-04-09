@@ -27,7 +27,7 @@ namespace IndividualCapstone.ActionFilters
                 }
                 else if (_claimsPrincipal.IsInRole("Employee"))
                 {
-                    context.Result = new RedirectToActionResult("Inex", "Employees", null);
+                    context.Result = new RedirectToActionResult("Index", "Employee", null);
                 }
             }
 

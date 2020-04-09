@@ -10,7 +10,6 @@ namespace IndividualCapstone.Models
 {
     public class Customer
     {
-        internal Customer id;
         
 
         [Key]
@@ -38,6 +37,15 @@ namespace IndividualCapstone.Models
         [Display(Name = "Account")]
         public int AccountId { get; set; }
         public Account Account { get; set; }
+
+        [ForeignKey("TypeOfService")]
+        [Display(Name = "Type Of Service")]
+        public int TypeOfServiceId { get; set; }
+        public TypeOfService TypeOfService { get; set; }
+
+      
+
+
 
 
     }

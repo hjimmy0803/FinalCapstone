@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200408164539_ Decided to not make a payment model into a table")]
+    partial class Decidedtonotmakeapaymentmodelintoatable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,41 +140,41 @@ namespace IndividualCapstone.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Ants")
-                        .HasColumnType("bit");
+                    b.Property<string>("Ants")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Bedbugs")
-                        .HasColumnType("bit");
+                    b.Property<string>("Bedbugs")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Bees")
-                        .HasColumnType("bit");
+                    b.Property<string>("Bees")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Earwigs")
-                        .HasColumnType("bit");
+                    b.Property<string>("Earwigs")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Mice")
-                        .HasColumnType("bit");
+                    b.Property<string>("Mice")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Rats")
-                        .HasColumnType("bit");
+                    b.Property<string>("Rats")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Roaches")
-                        .HasColumnType("bit");
+                    b.Property<string>("Roaches")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Silverfish")
-                        .HasColumnType("bit");
+                    b.Property<string>("Silverfish")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Spiders")
-                        .HasColumnType("bit");
+                    b.Property<string>("Spiders")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Wasps")
-                        .HasColumnType("bit");
+                    b.Property<string>("Wasps")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Waterbugs")
-                        .HasColumnType("bit");
+                    b.Property<string>("Waterbugs")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("YellowJackets")
-                        .HasColumnType("bit");
+                    b.Property<string>("YellowJackets")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -208,22 +210,22 @@ namespace IndividualCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "15b8449d-d5c9-4fd9-a8ce-5df71d5f26f9",
-                            ConcurrencyStamp = "dc502337-142e-44f5-b9d0-8ef41ca59d49",
+                            Id = "9754e6e5-dd78-415e-836c-db3a8040fde3",
+                            ConcurrencyStamp = "d12ae5de-35a0-4b8c-b6dc-94fa828066f8",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b3c42861-8463-4b44-a695-3b1395b0f347",
-                            ConcurrencyStamp = "1c735912-a5c5-4f5a-a146-1e3d36e1dbaf",
+                            Id = "ea1952cd-d21f-43b9-9246-f05a994c4959",
+                            ConcurrencyStamp = "5aa3a505-f544-46d7-92b1-991ae0368b39",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "b8864d97-51d7-43b7-81bd-8e4f40e2e8ad",
-                            ConcurrencyStamp = "8294532c-b434-47b8-8c1f-33464b586029",
+                            Id = "ee08a683-095e-4db9-ab83-7ca3451d60c3",
+                            ConcurrencyStamp = "f8996135-ff76-46dd-a8dd-838645f0dc67",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });

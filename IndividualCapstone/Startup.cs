@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using IndividualCapstone.ActionFilters;
+using Stripe;
 
 namespace IndividualCapstone
 {
@@ -23,6 +24,10 @@ namespace IndividualCapstone
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            StripeConfiguration.ApiKey = "SecretKey";
+
+
+
         }
 
         public IConfiguration Configuration { get; }
@@ -53,6 +58,8 @@ namespace IndividualCapstone
             {
                 config.Filters.Add(typeof(GlobalRouting));
             });
+            StripeConfiguration.ApiKey = "SecretKey";
+            
                 
 
         }
@@ -61,6 +68,7 @@ namespace IndividualCapstone
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,11 +1,11 @@
-﻿@model IEnumerable<IndividualCapstone.Models.Employee>
+﻿@model IEnumerable<IndividualCapstone.Models.Customer>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Pending Service Request</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -20,9 +20,31 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
+                @Html.DisplayNameFor(model => model.BusinessName)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address.ZipCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account.IsSuspended)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeOfService)
+            </th>
+           
+
         </tr>
     </thead>
     <tbody>
@@ -35,8 +57,30 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+                @Html.DisplayFor(modelItem => item.BusinessName)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address.ZipCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.IsSuspended)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfService)
+            </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

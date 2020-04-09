@@ -7,10 +7,10 @@ namespace IndividualCapstone.Models
 {
     public class Payment
     {
-        public string cardNumber { get; set; }
-        public int month { get; set; }
-        public int year { get; set; }
-        public string cvc { get; set; }
-        public int value { get; set; }
+        public string CardNumber { get; set; }
+        public int Month { get; set; }
+        public int Year { get; set; }
+        public string Cvc { get; set; }
+        public int Value { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200327140149_ making a new table")]
+    partial class makinganewtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,12 +48,6 @@ namespace IndividualCapstone.Migrations
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("Lat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Lng")
-                        .HasColumnType("float");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -92,9 +88,6 @@ namespace IndividualCapstone.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeOfServiceId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
@@ -102,8 +95,6 @@ namespace IndividualCapstone.Migrations
                     b.HasIndex("AddressId");
 
                     b.HasIndex("IdentityUserId");
-
-                    b.HasIndex("TypeOfServiceId");
 
                     b.ToTable("Customers");
                 });
@@ -129,54 +120,6 @@ namespace IndividualCapstone.Migrations
                     b.HasIndex("IdentityUserId");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("IndividualCapstone.Models.TypeOfService", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Ants")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Bedbugs")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Bees")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Earwigs")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Mice")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Rats")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Roaches")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Silverfish")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Spiders")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Wasps")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Waterbugs")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("YellowJackets")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeOfServices");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -208,22 +151,22 @@ namespace IndividualCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "15b8449d-d5c9-4fd9-a8ce-5df71d5f26f9",
-                            ConcurrencyStamp = "dc502337-142e-44f5-b9d0-8ef41ca59d49",
+                            Id = "7a7e0eb4-f131-4da5-9976-09c6f49c2461",
+                            ConcurrencyStamp = "6f7b79fa-cdf1-4243-8b21-e510a4595174",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b3c42861-8463-4b44-a695-3b1395b0f347",
-                            ConcurrencyStamp = "1c735912-a5c5-4f5a-a146-1e3d36e1dbaf",
+                            Id = "0c6f7684-d189-422d-b8d5-cd37b626fe7c",
+                            ConcurrencyStamp = "56d1a5d5-0604-4666-b6e7-df6447a7e648",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "b8864d97-51d7-43b7-81bd-8e4f40e2e8ad",
-                            ConcurrencyStamp = "8294532c-b434-47b8-8c1f-33464b586029",
+                            Id = "91d71067-3546-4406-bc48-d527398d27a4",
+                            ConcurrencyStamp = "8c12433a-3845-4c59-ae56-284baf253825",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -415,12 +358,6 @@ namespace IndividualCapstone.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
-
-                    b.HasOne("IndividualCapstone.Models.TypeOfService", "TypeOfService")
-                        .WithMany()
-                        .HasForeignKey("TypeOfServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("IndividualCapstone.Models.Employee", b =>
