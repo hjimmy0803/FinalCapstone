@@ -31,6 +31,8 @@ namespace IndividualCapstone.Controllers
                 .Include(c => c.Account)
                 .Include(c => c.TypeOfService);
                 
+
+                
             
             return View(customerRequest.ToList());
         }
@@ -38,18 +40,6 @@ namespace IndividualCapstone.Controllers
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            ViewBag.mymap = "https://maps.googleapis.com/maps/api/js?key=" + APIs.Keys.mapsKey + "&callback=initMap";
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customerMap = _context.Customers.Include(c => c.Address)
-                .Where(c => c.IdentityUserId == userId)
-                .Select(c => c.Address).FirstOrDefault();
-            ViewBag.CustomerLat = customerMap.Lat;
-            ViewBag.CustomerLng = customerMap.Lng;
-
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             var customer = await _context.Customers
                 .Include(c => c.Account)

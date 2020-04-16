@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200415172534_Made an estimated amount property in the customer table")]
+    partial class Madeanestimatedamountpropertyinthecustomertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,9 +99,6 @@ namespace IndividualCapstone.Migrations
 
                     b.Property<int>("Pay")
                         .HasColumnType("int");
-
-                    b.Property<bool>("ServiceDenied")
-                        .HasColumnType("bit");
 
                     b.Property<int>("TypeOfServiceId")
                         .HasColumnType("int");
@@ -217,22 +216,22 @@ namespace IndividualCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c8129159-80d4-4561-9379-95dcc63f668e",
-                            ConcurrencyStamp = "c899d3d8-0c69-43b7-933e-61ebd649c619",
+                            Id = "5871ede8-12dc-4019-a375-3126e756fffb",
+                            ConcurrencyStamp = "a015a928-be0b-43b0-a6a2-9a0afc044a74",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "ae4a7703-047f-4a98-9545-c7c95be0dcb7",
-                            ConcurrencyStamp = "01c86e2b-8bbb-40a7-9999-fa42f9dfb31b",
+                            Id = "79d8c930-e658-4824-9140-34c588a269ce",
+                            ConcurrencyStamp = "688167ee-46c9-4591-b8d1-7d8376a9d9fc",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "d1b3dd11-c986-4bbf-a86b-732752c3f53c",
-                            ConcurrencyStamp = "f960c826-f064-4fd9-9b66-08a934d5fe3f",
+                            Id = "50f4d8e3-c9bb-4e3a-aecd-449d2c21a4a2",
+                            ConcurrencyStamp = "84c45cd2-9ee1-4838-8488-fadc61376776",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
