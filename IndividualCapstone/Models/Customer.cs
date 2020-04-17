@@ -24,8 +24,8 @@ namespace IndividualCapstone.Models
         [Display (Name = "Business Name")]
         public string BusinessName { get; set; }
 
-        [Display (Name = "Pay")]
-        public int Pay { get; set; }
+        [Display (Name = "Final Pay")]
+        public int FinalPay { get; set; }
 
         [Display (Name = "Estimated Amount")]
         public double EstimatedAmount { get; set; }
@@ -34,9 +34,9 @@ namespace IndividualCapstone.Models
         public bool ServiceDenied { get; set; }
 
         [Display (Name = "Service Accepted")]
-        public bool ServiceAccpeted { get; set; }
+        public bool ServiceAccepted { get; set; }
 
-      
+
         [ForeignKey("IdentityUSer")]
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }

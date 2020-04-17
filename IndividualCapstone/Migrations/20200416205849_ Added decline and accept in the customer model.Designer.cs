@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200416205849_ Added decline and accept in the customer model")]
+    partial class Addeddeclineandacceptinthecustomermodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,9 +88,6 @@ namespace IndividualCapstone.Migrations
                     b.Property<double>("EstimatedAmount")
                         .HasColumnType("float");
 
-                    b.Property<int>("FinalPay")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -98,7 +97,10 @@ namespace IndividualCapstone.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("ServiceAccepted")
+                    b.Property<int>("Pay")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ServiceAccpeted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("ServiceDenied")
@@ -220,22 +222,22 @@ namespace IndividualCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "767d6e12-37d7-4b0c-9ec0-3b9eaa8ab8ee",
-                            ConcurrencyStamp = "ddce679a-5d1a-4871-a381-c5700c0f129c",
+                            Id = "8fe31727-858c-4e7b-9605-a4a87cf9eaf3",
+                            ConcurrencyStamp = "382ddd23-4bd5-42ce-adea-d41a8e0bd938",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1d103155-fdd2-45e9-8d99-b93541508fc6",
-                            ConcurrencyStamp = "d0b03f4d-e28e-40f1-82d0-7d88a2236939",
+                            Id = "13d4d6e0-79c4-43ee-8e91-b36c3b66e67e",
+                            ConcurrencyStamp = "5a9faee6-953a-47e1-92d5-23980fdf9f16",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "50a27fe3-f491-4d87-8140-d21dcd9ae104",
-                            ConcurrencyStamp = "0066bd34-8648-4a7f-85a3-e34347eaae25",
+                            Id = "c2f0925f-f9d8-4e79-bcd0-fb3c2a22dc82",
+                            ConcurrencyStamp = "8e0e0a08-0d7b-4840-9383-5f6940a4e9a3",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });

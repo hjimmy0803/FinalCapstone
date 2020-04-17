@@ -100,63 +100,63 @@ namespace IndividualCapstone.Controllers
                 //This where estimated price will be assigned based on service selected
                 if (customer.TypeOfService.Ants == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Ants;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Ants;
                 }
-                else if (customer.TypeOfService.Bedbugs == true)
+                if (customer.TypeOfService.Bedbugs == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Bedbugs;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Bedbugs;
                 }
-                else if (customer.TypeOfService.Bees == true)
+                if (customer.TypeOfService.Bees == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Bees;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Bees;
                 }
-                else if (customer.TypeOfService.Earwigs == true)
+                if (customer.TypeOfService.Earwigs == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Earwigs;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Earwigs;
                 }
-                else if (customer.TypeOfService.Mice == true)
+                if (customer.TypeOfService.Mice == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Mice;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Mice;
                 }
-                else if  (customer.TypeOfService.Rats == true)
+                if  (customer.TypeOfService.Rats == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Rats;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Rats;
                 }
-                else if (customer.TypeOfService.Roaches == true)
+                if (customer.TypeOfService.Roaches == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Roaches;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Roaches;
                 }
-                else if (customer.TypeOfService.Silverfish == true)
+                if (customer.TypeOfService.Silverfish == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Silverfish;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Silverfish;
                 }
-                else if (customer.TypeOfService.Spiders == true)
+                if (customer.TypeOfService.Spiders == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Spiders;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Spiders;
                 }
-                else if (customer.TypeOfService.Wasps == true)
+                if (customer.TypeOfService.Wasps == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Wasps;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Wasps;
                 }
-                else if (customer.TypeOfService.Waterbugs == true)
+                if (customer.TypeOfService.Waterbugs == true)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.Waterbugs;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.Waterbugs;
                 }
-                else if(customer.TypeOfService.YellowJackets)
+                 if(customer.TypeOfService.YellowJackets)
                 {
-                    customer.EstimatedAmount += 0;
-                    customer.EstimatedAmount = Constants.YellowJackets;
+                    //customer.EstimatedAmount += 0;
+                    customer.EstimatedAmount += Constants.YellowJackets;
                 }
                
 
@@ -219,35 +219,22 @@ namespace IndividualCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsync( int? id, Customer customer)
+        public async Task<IActionResult> EditAsync( int id, Customer customer)
         {
+
+            if (id != customer.Id)
+            {
+                return NotFound();
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    HttpClient client = new HttpClient();
-
-                    string location = customer.Address.Street + "+" + customer.Address.City + "+" + customer.Address.State + "+" +
-                        customer.Address.ZipCode;
-                    string url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + APIs.Keys.mapsKey;
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    string answer = await response.Content.ReadAsStringAsync();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        GeoCode GeoResult = JsonConvert.DeserializeObject<GeoCode>(answer);
-                        var lat = GeoResult.results[0].geometry.location.lat;
-                        var lng = GeoResult.results[0].geometry.location.lng;
-                        customer.Address.Lat = lat;
-                        customer.Address.Lng = lng;
-                      
-
-
-                    }
 
                     _context.Update(customer);
                     await _context.SaveChangesAsync();
-
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -260,8 +247,8 @@ namespace IndividualCapstone.Controllers
                         throw;
                     }
                 }
+
             }
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             ViewData["AccountId"] = new SelectList(_context.Set<Account>(), "Id", "Id", customer.AccountId);
             ViewData["AddressId"] = new SelectList(_context.Set<Address>(), "Id", "Id", customer.AddressId);
             return View(customer);

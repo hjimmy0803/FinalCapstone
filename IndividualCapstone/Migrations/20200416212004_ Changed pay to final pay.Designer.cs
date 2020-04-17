@@ -4,14 +4,16 @@ using IndividualCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IndividualCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200416212004_ Changed pay to final pay")]
+    partial class Changedpaytofinalpay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +100,7 @@ namespace IndividualCapstone.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("ServiceAccepted")
+                    b.Property<bool>("ServiceAccpeted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("ServiceDenied")
@@ -220,22 +222,22 @@ namespace IndividualCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "767d6e12-37d7-4b0c-9ec0-3b9eaa8ab8ee",
-                            ConcurrencyStamp = "ddce679a-5d1a-4871-a381-c5700c0f129c",
+                            Id = "e037f3f1-4552-4009-b960-1a244bfa6979",
+                            ConcurrencyStamp = "98318af0-b701-45b8-8f55-3bf58c92e0b0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1d103155-fdd2-45e9-8d99-b93541508fc6",
-                            ConcurrencyStamp = "d0b03f4d-e28e-40f1-82d0-7d88a2236939",
+                            Id = "b340a0fb-04af-43e0-b33b-a81252bb2ce1",
+                            ConcurrencyStamp = "574714aa-40fa-4d6c-afed-d1f941e8b00d",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "50a27fe3-f491-4d87-8140-d21dcd9ae104",
-                            ConcurrencyStamp = "0066bd34-8648-4a7f-85a3-e34347eaae25",
+                            Id = "feec2524-4c9f-4574-869b-b6c7976ffc2b",
+                            ConcurrencyStamp = "3aa45988-fbef-486d-a538-05829c565440",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         });
